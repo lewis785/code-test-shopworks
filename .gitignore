@@ -1,3 +1,6 @@
 .idea
 vendor
 var
+
+supervisord.log
+supervisord.pid
