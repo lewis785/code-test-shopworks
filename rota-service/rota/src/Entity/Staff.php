@@ -28,6 +28,7 @@ class Staff
 
     /**
      * @ORM\ManyToOne(targetEntity="Shop", inversedBy="staff")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $shop;
 
