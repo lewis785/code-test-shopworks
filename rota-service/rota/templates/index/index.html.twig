@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+<style>
+.form-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+</style>
+
+<div class="form-wrapper">
+    <div class="shop-form">
+        <h4> Create Shop </h4>
+        {{ form(shopForm) }}
+    </div>
+
+    <div class="rota-form">
+        <h4> Create Rota </h4>
+        {{ form(rotaForm) }}
+    </div>
+
+    <div class="staff-form">
+        <h4> Create Staff </h4>
+        {{ form(staffForm) }}
+    </div>
+
+    <div class="rota-form">
+        <h4> Create Shift </h4>
+        {{ form(shiftForm) }}
+    </div>
+</div>
+
+{{ result }}
+{% endblock %}

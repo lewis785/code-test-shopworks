@@ -1,0 +1,38 @@
+{#{% extends 'index/index.html.twig' %}#}
+
+{% block body %}
+<div class="manned-hours-container">
+    <div class="day">
+        <h3>Monday</h3>
+        {{ monday }}
+    </div>
+    <div class="day">
+        <h3>Tuesday</h3>
+        {{ tuesday }}
+    </div>
+    <div class="day">
+        <h3>Wednesday</h3>
+        {{ wednesday }}
+    </div>
+    <div class="day">
+        <h3>Thursday</h3>
+        {{ thursday }}
+    </div>
+    <div class="day">
+        <h3>Friday</h3>
+        {{ friday }}
+    </div>
+    <div class="day">
+        <h3>Saturday</h3>
+        {{ monday }}
+    </div>
+    <div class="day">
+        <h3>Sunday</h3>
+        {{ monday }}
+    </div>
+    <div class="day">
+        <h3>Total</h3>
+        {{ total }}
+    </div>
+</div>
+{% endblock %}

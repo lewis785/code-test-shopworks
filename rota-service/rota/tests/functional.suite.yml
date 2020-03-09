@@ -11,7 +11,9 @@ modules:
         - Symfony:
             app_path: 'src'
             environment: 'test'
-#        - Doctrine2:
-#            depends: Symfony
-#            cleanup: true
+        - Doctrine2:
+            depends: Symfony
+            cleanup: true
+        - REST:
+            depends: Symfony
         - \App\Tests\Helper\Functional

@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShiftRepository")
  */
-class Shift
+class Shift implements JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -132,5 +134,23 @@ class Shift
         }
 
         return $this;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'staff' => $this->getStaff(),
+            'startDateTime' => Chronos::instance($this->getStartTime())->toIso8601String(),
+            'endDateTime' => Chronos::instance($this->getEndTime())->toIso8601String(),
+        ];
     }
 }
