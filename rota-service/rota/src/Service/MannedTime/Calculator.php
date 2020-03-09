@@ -8,19 +8,24 @@ use App\Entity\Shift;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManagerInterface;
 
-class Single
+class Calculator
 {
     private SingleManning $singleManning;
 
     public function __construct(Rota $rota, EntityManagerInterface $entityManager)
     {
-        $this->singleManning = new SingleManning();
+        $this->singleManning = $this->createSingleManning();
         $this->process($this->retrieveShifts($rota, $entityManager));
     }
 
     public function getSingleManning(): SingleManning
     {
         return $this->singleManning;
+    }
+
+    protected function createSingleManning(): SingleManning
+    {
+        return new SingleManning();
     }
 
     protected function retrieveShifts(Rota $rota, EntityManagerInterface $entityManager): array

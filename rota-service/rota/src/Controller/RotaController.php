@@ -6,7 +6,7 @@ use App\Entity\Rota;
 use App\Entity\Shift;
 use App\Repository\RotaRepository;
 use App\Repository\ShiftRepository;
-use App\Service\MannedTime\Single;
+use App\Service\MannedTime\Calculator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +43,7 @@ class RotaController extends AbstractController
      */
     public function getSingleMannedTime(Rota $rota): Response
     {
-        $singleMannedTime = new Single($rota, $this->entityManager);
+        $singleMannedTime = new Calculator($rota, $this->entityManager);
         return new Response(json_encode(['data' => $singleMannedTime->getSingleManning()]), Response::HTTP_OK);
     }
 }
