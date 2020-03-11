@@ -2,7 +2,8 @@
 
 namespace App\Service\MannedTime;
 
-use App\Entity\DataTransferObject\SingleManning;
+
+use App\DTO\SingleManning;
 use App\Entity\Rota;
 use App\Entity\Shift;
 use Cake\Chronos\Chronos;

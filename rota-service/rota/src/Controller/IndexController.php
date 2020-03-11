@@ -11,6 +11,7 @@ use App\Form\ShiftType;
 use App\Form\ShopType;
 use App\Form\StaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,65 +33,32 @@ class IndexController extends AbstractController
         $staffForm = $this->createForm(StaffType::class, $staff);
 
         if ($request->getMethod() === 'POST') {
-            if ($request->request->has('rota')) {
-                $rotaForm->handleRequest($request);
-                if ($rotaForm->isSubmitted() && $rotaForm->isValid()) {
-                    $rota = $rotaForm->getData();
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($rota);
-                    $entityManager->flush();
-                }
-            }
-
-            if ($request->request->has('staff')) {
-                $staffForm->handleRequest($request);
-                if ($staffForm->isSubmitted() && $staffForm->isValid()) {
-                    $staff = $staffForm->getData();
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($staff);
-                    $entityManager->flush();
-                }
-            }
-
-            if ($request->request->has('shift')) {
-                $shiftForm->handleRequest($request);
-                if ($shiftForm->isSubmitted() && $shiftForm->isValid()) {
-                    $shift = $shiftForm->getData();
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($shift);
-                    $entityManager->flush();
-                }
-            }
-
-            if ($request->request->has('shop')) {
-                $shopForm->handleRequest($request);
-                if ($shopForm->isSubmitted() && $shopForm->isValid()) {
-                    $shop = $shopForm->getData();
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($shop);
-                    $entityManager->flush();
-                }
-            }
-
+            $this->handleRequest($rotaForm, $request, 'rota');
+            $this->handleRequest($staffForm, $request, 'staff');
+            $this->handleRequest($shiftForm, $request, 'shift');
+            $this->handleRequest($shopForm, $request, 'shop');
         }
-
-        $result = $this->render('index/mannedhours.html.twig', [
-            'monday' => 1,
-            'tuesday' => 1,
-            'wednesday' => 1,
-            'thursday' => 1,
-            'friday' => 1,
-            'saturday' => 1,
-            'sunday' => 1,
-            'total' => 1
-        ]);
 
         return $this->render('index/index.html.twig', [
             'shopForm' => $shopForm->createView(),
             'rotaForm' => $rotaForm->createView(),
             'staffForm' => $staffForm->createView(),
-            'shiftForm' => $shiftForm->createView(),
-            'result' => $result
+            'shiftForm' => $shiftForm->createView()
         ]);
+    }
+
+    private function handleRequest(FormInterface $form, Request $request, $key): void
+    {
+        if (!$request->request->has($key)) {
+            return;
+        }
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $shift = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($shift);
+            $entityManager->flush();
+        }
     }
 }

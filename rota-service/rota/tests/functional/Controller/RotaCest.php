@@ -5,10 +5,8 @@ use App\Entity\Rota;
 use App\Entity\Shift;
 use App\Entity\Shop;
 use App\Entity\Staff;
-use App\Service\MannedTime\Calculator;
 use App\Tests\FunctionalTester;
 use Cake\Chronos\Chronos;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class RotaCest
@@ -258,5 +256,4 @@ class RotaCest
             ['shop' => $shop, 'weekCommenceDate' => $this->getStartOfWeek()->toDateString()]);
 
     }
-
 }

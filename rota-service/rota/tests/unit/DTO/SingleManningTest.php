@@ -2,9 +2,10 @@
 
 namespace Tests\Unit\Entity\DataTransferObject;
 
-use App\Entity\DataTransferObject\SingleManning;
+use App\DTO\SingleManning;
 use Codeception\Test\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
+use UnexpectedValueException;
 
 class SingleManningTest extends Unit
 {
@@ -69,7 +70,7 @@ class SingleManningTest extends Unit
     {
         $fixture = new SingleManning();
 
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage('Invalid day provided');
 
         $fixture->addToDay(-1, 100);

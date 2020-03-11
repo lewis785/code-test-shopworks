@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Entity\DataTransferObject;
+namespace App\DTO;
 
 use UnexpectedValueException;
 use JsonSerializable;
