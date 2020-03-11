@@ -16,7 +16,7 @@ RUN apk update \
 RUN docker-php-ext-install pdo pdo_mysql
 
 COPY files/etc/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY files/etc/supervisor/supervisord.conf /etc/supervisor/conf.d/
+COPY files/etc/supervisor/supervisord*.conf /etc/supervisor/conf.d/
 
 WORKDIR /var/www
 COPY rota/ .
