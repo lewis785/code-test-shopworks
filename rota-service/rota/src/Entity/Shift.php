@@ -5,6 +5,7 @@ namespace App\Entity;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
@@ -46,6 +47,11 @@ class Shift implements JsonSerializable
      * @ORM\OneToMany(targetEntity="App\Entity\ShiftBreak", mappedBy="shift", orphanRemoval=true)
      */
     private $shiftBreaks;
+
+    public static function getRepository(EntityManagerInterface $entityManager)
+    {
+        return $entityManager->getRepository(__CLASS__);
+    }
 
     public function __construct()
     {
